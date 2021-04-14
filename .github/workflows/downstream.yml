@@ -23,16 +23,10 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install .
-          pip install pyqt5 pytest \
-                      git+https://github.com/ipython/ipykernel.git#egg=ipykernel[test] \
-                      git+https://github.com/jupyter/qtconsole.git#egg=qtconsole[test] \
-                      nbclient[test] nbconvert[test] jupyter_server[test]
+          pip install pytest nbclient[test]
+          pip install https://github.com/davidbrochart/ipykernel/archive/test_downstream.zip --force-reinstall
           pip freeze
 
       - name: Run tests
         run: |
-          pytest --pyargs ipykernel
-          #pytest --pyargs qtconsole
           pytest --pyargs nbclient
-          pytest --pyargs nbconvert
-          pytest --pyargs jupyter_server
